@@ -7,30 +7,20 @@ import { auth } from '../../../firebase';
 import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { Grid, Paper, Avatar } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+import {
+  avatar,
+  gridMainStyle,
+  gridStyle,
+  link,
+  linktext,
+  paperStyle,
+  title,
+} from '../authstyles';
+import Typography from '@mui/material/Typography';
 
 const SignUp = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const [open, setOpen] = React.useState(false);
-
-  const paperStyle: any = {
-    padding: 20,
-    height: 450,
-    width: 350,
-    margin: '100px auto',
-  };
-
-  const gridStyle: any = {
-    padding: 30,
-    align: 'center',
-  };
-
-  const avatar: any = {
-    backgroundColor: '#211090',
-  };
 
   const handleSignUp = (email: string, password: string) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -48,19 +38,23 @@ const SignUp = () => {
 
   return (
     <div>
-      <Grid direction='column' justifyContent='center' alignItems='center'>
+      <Grid style={gridMainStyle}>
         <Paper style={paperStyle} elevation={10}>
-          <Grid style={gridStyle} justifyContent='center' alignItems='center'>
+          <Grid container direction='column' style={gridStyle}>
             <Avatar style={avatar}>
               <LockOutlinedIcon />
             </Avatar>
-            <h2>Sign up</h2>
-            <p>
+            <Typography style={title} variant='h4'>
+              Sign up
+            </Typography>
+            <Typography style={linktext}>
               Already have an account?
               <span>
-                <Link to='/'>Sign In</Link>
+                <Link style={link} to='/'>
+                  Sign In
+                </Link>
               </span>
-            </p>
+            </Typography>
             <Form title='Sign up' handleClick={handleSignUp} />
           </Grid>
         </Paper>

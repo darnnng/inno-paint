@@ -5,28 +5,30 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../firebase';
 import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { setUser } from '../../../store/slices/userSlice';
-import { Grid, Paper, Avatar } from '@mui/material';
+import {
+  Grid,
+  Paper,
+  Avatar,
+  Typography,
+  TextField,
+  Snackbar,
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import {
+  avatar,
+  gridMainStyle,
+  gridStyle,
+  link,
+  linktext,
+  paperStyle,
+  title,
+} from '../authstyles';
+//import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
 const SignIn = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const paperStyle: any = {
-    padding: 20,
-    height: 450,
-    width: 350,
-    margin: '100px auto',
-  };
-
-  const gridStyle: any = {
-    padding: 30,
-    align: 'center',
-  };
-
-  const avatar: any = {
-    backgroundColor: '#211090',
-  };
+  //const [open, setOpen] = React.useState(false);
 
   const handleLogin = (email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
@@ -44,19 +46,23 @@ const SignIn = () => {
 
   return (
     <div>
-      <Grid direction='column' justifyContent='center' alignItems='center'>
+      <Grid style={gridMainStyle}>
         <Paper style={paperStyle} elevation={10}>
-          <Grid style={gridStyle} justifyContent='center' alignItems='center'>
+          <Grid container direction='column' style={gridStyle}>
             <Avatar style={avatar}>
               <LockOutlinedIcon />
             </Avatar>
-            <h2>Sign In</h2>
-            <p>
+            <Typography style={title} variant='h4'>
+              Sign in
+            </Typography>
+            <Typography style={linktext}>
               Don't have an account yet?
               <span>
-                <Link to='/signup'>Sign up</Link>
+                <Link style={link} to='/signup'>
+                  Sign up
+                </Link>
               </span>
-            </p>
+            </Typography>
             <Form title='Sign in' handleClick={handleLogin} />
           </Grid>
         </Paper>
