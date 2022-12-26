@@ -2,7 +2,12 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { setUser } from '../../../store/slices/userSlice';
 import { Form } from '../Form/Form';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  updateEmail,
+} from 'firebase/auth';
 import { auth } from '../../../firebase';
 import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { Grid, Paper, Avatar } from '@mui/material';
@@ -21,6 +26,7 @@ import Typography from '@mui/material/Typography';
 const SignUp = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [user, setCurrentUser] = React.useState({});
 
   const handleSignUp = (email: string, password: string) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -33,6 +39,7 @@ const SignUp = () => {
         );
         navigate('/gallery');
       })
+
       .catch(console.error);
   };
 
