@@ -29,3 +29,7 @@ export const selectForm: any = {
   width: '300px',
   marginTop: '30px',
 };
+
+export const linkeditor: any = {
+  color: 'white',
+};

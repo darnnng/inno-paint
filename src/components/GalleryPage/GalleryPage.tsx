@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -18,6 +19,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { removeUser } from '../../store/slices/userSlice';
 import {
   galleryGrid,
+  linkeditor,
   logout,
   selectForm,
   titleMain,
@@ -47,7 +49,11 @@ const GalleryPage = () => {
           Welcome, {email}!
         </Typography>
         <Typography variant='h5' style={titleSmall}>
-          Check out the latest paintings:
+          Check out the latest paintings or{' '}
+          <Link style={linkeditor} to='/editor'>
+            {' '}
+            create something new
+          </Link>
         </Typography>
 
         <Button style={logout} variant='contained' onClick={handleLogout}>
