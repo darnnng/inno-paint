@@ -14,7 +14,6 @@ const canvas = {
 };
 
 const canvasBoard = {
-  border: '1px solid black',
   backgroundColor: 'white',
 };
 

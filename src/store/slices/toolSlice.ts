@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import Brush from '../../tools/Brush';
+import Circle from '../../tools/Circle';
+import Rectangle from '../../tools/Rectangle';
 
 interface ITool {
-  tool: null | Brush;
+  tool: null | Brush | Rectangle | Circle;
 }
 
 const initialState: ITool = {
