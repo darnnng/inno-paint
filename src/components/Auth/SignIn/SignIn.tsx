@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Form } from '../Form/Form';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
@@ -12,6 +12,7 @@ import {
   Typography,
   TextField,
   Snackbar,
+  Alert,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {
@@ -28,7 +29,13 @@ import {
 const SignIn = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  //const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const showError = (errMessage: string) => {
+    setOpen(true);
+    setErrorMessage(errMessage);
+  };
 
   const handleLogin = (email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
@@ -41,11 +48,27 @@ const SignIn = () => {
         );
         navigate('/gallery');
       })
-      .catch(console.error);
+      .catch((err) => showError(err));
+  };
+
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
     <div>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+        <Alert variant='filled' severity='error' sx={{ width: '100%' }}>
+          Error. Please check your data.
+        </Alert>
+      </Snackbar>
       <Grid style={gridMainStyle}>
         <Paper style={paperStyle} elevation={10}>
           <Grid container direction='column' style={gridStyle}>

@@ -1,23 +1,32 @@
 import React from 'react';
-import { Button, Grid } from '@mui/material';
+import {
+  Button,
+  Grid,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
 import CropSquareIcon from '@mui/icons-material/CropSquare';
 import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
-import LineWeightIcon from '@mui/icons-material/LineWeight';
 import SaveIcon from '@mui/icons-material/Save';
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Brush from '../../../tools/Brush';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux-hooks';
-import { setTool } from '../../../store/slices/toolSlice';
+import {
+  setTool,
+  setColour,
+  setWidth,
+  clearCanvas,
+} from '../../../store/slices/toolSlice';
 import { selectCanvas } from '../../../store/slices/canvasSlice';
 import { useState } from 'react';
 import Rectangle from '../../../tools/Rectangle';
 import Circle from '../../../tools/Circle';
 import Line from '../../../tools/Line';
-import Eraser from '../../../tools/Eraser';
 
 const toolbar: any = {
   height: '45px',
@@ -47,12 +56,27 @@ const toolbarBtn: any = {
 const Toolbar = () => {
   const dispatch = useAppDispatch();
   const { canvas } = useAppSelector(selectCanvas);
-  const [activeTool, setActiveTool] = useState<string>('brush');
+  const [activeTool, setActiveTool] = useState('brush');
+  const [colourValue, setColourValue] = useState('#111111');
+  const [widthValue, setWidthValue] = useState(1);
+  const widthSizes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  const chooseTool = (tool: any, value: any) => {
+  const chooseColour = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setColourValue(event.target.value);
+    dispatch(setColour(event.target.value));
+  };
+
+  const chooseWidth = (event: SelectChangeEvent<number>): void => {
+    setWidthValue(Number(event.target.value));
+    dispatch(setWidth(Number(event.target.value)));
+  };
+
+  const chooseTool = (tool: any, value: string) => {
     dispatch(setTool(tool));
+    dispatch(setColour(colourValue));
+    dispatch(setWidth(widthValue));
+    console.log(colourValue, tool);
     setActiveTool(value);
-    console.log(activeTool);
   };
 
   const chooseBrush = () => {
@@ -71,8 +95,8 @@ const Toolbar = () => {
     chooseTool(new Line(canvas), 'line');
   };
 
-  const chooseEraser = () => {
-    chooseTool(new Eraser(canvas), 'eraser');
+  const clear = () => {
+    dispatch(clearCanvas());
   };
 
   return (
@@ -90,13 +114,21 @@ const Toolbar = () => {
         <PanoramaFishEyeIcon />
       </Button>
       <Button variant='contained' style={toolbarBtn}>
-        <input type='color' />
+        <input value={colourValue} onChange={chooseColour} type='color' />
       </Button>
 
-      <Button variant='contained' style={toolbarBtn}>
-        <LineWeightIcon />
-      </Button>
-      <Button variant='contained' style={toolbarBtn} onClick={chooseEraser}>
+      <Select
+        style={{ height: '25px' }}
+        value={widthValue}
+        onChange={chooseWidth}
+      >
+        {widthSizes.map((i) => (
+          <MenuItem key={i} value={i}>
+            {i}px
+          </MenuItem>
+        ))}
+      </Select>
+      <Button variant='contained' style={toolbarBtn} onClick={clear}>
         <DeleteOutlineIcon />
       </Button>
       <Button variant='contained' style={toolbarBtn}>

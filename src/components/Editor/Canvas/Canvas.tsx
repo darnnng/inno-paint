@@ -30,7 +30,7 @@ const Canvas = () => {
 
   return (
     <Grid style={canvas}>
-      <canvas ref={canvasRef} style={canvasBoard} width={650} height={450} />
+      <canvas ref={canvasRef} style={canvasBoard} width={950} height={550} />
     </Grid>
   );
 };

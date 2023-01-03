@@ -2,7 +2,6 @@ import { Grid, Button } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Canvas } from './Canvas/Canvas';
-import { Settings } from './Canvas/Settings';
 import { Toolbar } from './Canvas/Toolbar';
 
 const gridstyle: any = {
@@ -17,7 +16,7 @@ const gridstyle: any = {
 
 export const btnBack: any = {
   position: 'absolute',
-  top: '30px',
+  top: '20px',
   right: '30px',
   fontFamily: 'Raleway',
 };
@@ -36,7 +35,6 @@ const Editor = () => {
         </Link>
       </Button>
       <Toolbar />
-      <Settings />
       <Canvas />
     </div>
   );

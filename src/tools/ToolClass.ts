@@ -8,6 +8,20 @@ export class Tool {
     this.destroyEvents();
   }
 
+  set lineColour(color: string) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.ctx!.strokeStyle = color;
+  }
+
+  set lineWidth(width: number) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.ctx!.lineWidth = width;
+  }
+
+  clear() {
+    this.ctx?.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+
   destroyEvents() {
     this.canvas.onmousemove = null;
     this.canvas.onmousedown = null;
