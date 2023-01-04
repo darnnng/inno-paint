@@ -24,6 +24,7 @@ import {
   paperStyle,
   title,
 } from '../authstyles';
+import { Error } from '../../general/ErrorToast/Error';
 //import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
 const SignIn = () => {
@@ -31,11 +32,6 @@ const SignIn = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
-  const showError = (errMessage: string) => {
-    setOpen(true);
-    setErrorMessage(errMessage);
-  };
 
   const handleLogin = (email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
@@ -48,7 +44,12 @@ const SignIn = () => {
         );
         navigate('/gallery');
       })
-      .catch((err) => showError(err));
+      .catch((err) => showError(err.message));
+  };
+
+  const showError = (errMessage: string) => {
+    setOpen(true);
+    setErrorMessage(errMessage);
   };
 
   const handleClose = (
@@ -58,17 +59,16 @@ const SignIn = () => {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
   };
 
   return (
     <div>
-      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-        <Alert variant='filled' severity='error' sx={{ width: '100%' }}>
-          Error. Please check your data.
-        </Alert>
-      </Snackbar>
+      <Error
+        errorMessage={errorMessage}
+        open={open}
+        handleClose={handleClose}
+      />
       <Grid style={gridMainStyle}>
         <Paper style={paperStyle} elevation={10}>
           <Grid container direction='column' style={gridStyle}>

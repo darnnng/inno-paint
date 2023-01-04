@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { setUser } from '../../../store/slices/userSlice';
 import { Form } from '../Form/Form';
@@ -22,11 +22,14 @@ import {
   title,
 } from '../authstyles';
 import Typography from '@mui/material/Typography';
+import { Error } from '../../general/ErrorToast/Error';
 
 const SignUp = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [user, setCurrentUser] = React.useState({});
+  const [open, setOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSignUp = (email: string, password: string) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -40,11 +43,31 @@ const SignUp = () => {
         navigate('/gallery');
       })
 
-      .catch(console.error);
+      .catch((err) => showError(err.message));
+  };
+
+  const showError = (errMessage: string) => {
+    setOpen(true);
+    setErrorMessage(errMessage);
+  };
+
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
   };
 
   return (
     <div>
+      <Error
+        errorMessage={errorMessage}
+        open={open}
+        handleClose={handleClose}
+      />
       <Grid style={gridMainStyle}>
         <Paper style={paperStyle} elevation={10}>
           <Grid container direction='column' style={gridStyle}>

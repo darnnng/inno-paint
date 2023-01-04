@@ -13,7 +13,7 @@ const canvasSlice = createSlice({
   initialState,
   reducers: {
     setCanvas(state, action) {
-      return { canvas: action.payload };
+      return { ...state, canvas: action.payload };
     },
   },
 });

@@ -11,10 +11,11 @@ import CropSquareIcon from '@mui/icons-material/CropSquare';
 import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 import SaveIcon from '@mui/icons-material/Save';
-import UndoIcon from '@mui/icons-material/Undo';
-import RedoIcon from '@mui/icons-material/Redo';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import Brush from '../../../tools/Brush';
+import ChangeHistoryIcon from '@mui/icons-material/ChangeHistory';
+import HexagonOutlinedIcon from '@mui/icons-material/HexagonOutlined';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux-hooks';
 import {
   setTool,
@@ -27,6 +28,9 @@ import { useState } from 'react';
 import Rectangle from '../../../tools/Rectangle';
 import Circle from '../../../tools/Circle';
 import Line from '../../../tools/Line';
+import Star from '../../../tools/Star';
+import Triangle from '../../../tools/Triangle';
+import Polygon from '../../../tools/Polygon';
 
 const toolbar: any = {
   height: '45px',
@@ -71,12 +75,12 @@ const Toolbar = () => {
     dispatch(setWidth(Number(event.target.value)));
   };
 
-  const chooseTool = (tool: any, value: string) => {
+  const chooseTool = (tool: any, toolName: string) => {
     dispatch(setTool(tool));
     dispatch(setColour(colourValue));
     dispatch(setWidth(widthValue));
-    console.log(colourValue, tool);
-    setActiveTool(value);
+    setActiveTool(toolName);
+    console.log(tool);
   };
 
   const chooseBrush = () => {
@@ -99,6 +103,18 @@ const Toolbar = () => {
     dispatch(clearCanvas());
   };
 
+  const chooseStar = () => {
+    chooseTool(new Star(canvas), 'star');
+  };
+
+  const chooseTriangle = () => {
+    chooseTool(new Triangle(canvas), 'triangle');
+  };
+
+  const choosePolygon = () => {
+    chooseTool(new Polygon(canvas), 'polygon');
+  };
+
   return (
     <Grid style={toolbar} container>
       <Button variant='contained' style={toolbarBtn} onClick={chooseBrush}>
@@ -107,11 +123,20 @@ const Toolbar = () => {
       <Button variant='contained' style={toolbarBtn} onClick={chooseLine}>
         <HorizontalRuleIcon />
       </Button>
+      <Button variant='contained' style={toolbarBtn} onClick={chooseCircle}>
+        <PanoramaFishEyeIcon />
+      </Button>
       <Button variant='contained' style={toolbarBtn} onClick={chooseRect}>
         <CropSquareIcon />
       </Button>
-      <Button variant='contained' style={toolbarBtn} onClick={chooseCircle}>
-        <PanoramaFishEyeIcon />
+      <Button variant='contained' style={toolbarBtn} onClick={chooseTriangle}>
+        <ChangeHistoryIcon />
+      </Button>
+      <Button variant='contained' style={toolbarBtn} onClick={chooseStar}>
+        <StarOutlineIcon />
+      </Button>
+      <Button variant='contained' style={toolbarBtn} onClick={choosePolygon}>
+        <HexagonOutlinedIcon />
       </Button>
       <Button variant='contained' style={toolbarBtn}>
         <input value={colourValue} onChange={chooseColour} type='color' />
@@ -133,12 +158,6 @@ const Toolbar = () => {
       </Button>
       <Button variant='contained' style={toolbarBtn}>
         <SaveIcon color='action' />
-      </Button>
-      <Button variant='contained' style={toolbarBtn}>
-        <UndoIcon color='action' />
-      </Button>
-      <Button variant='contained' style={toolbarBtn}>
-        <RedoIcon color='action' />
       </Button>
     </Grid>
   );
