@@ -32,14 +32,50 @@ import Star from '../../../tools/Star';
 import Triangle from '../../../tools/Triangle';
 import Polygon from '../../../tools/Polygon';
 import { ToolbarDiv, toolbarBtn } from '../editorstyles';
+import { useAuth } from '../../../hooks/useAuth';
+import { canvasService } from '../../../services/canvasService';
+import { Error } from '../../general/ErrorToast/Error';
 
 const Toolbar = () => {
   const dispatch = useAppDispatch();
   const { canvas } = useAppSelector(selectCanvas);
+  const { id, email } = useAuth();
   const [activeTool, setActiveTool] = useState('brush');
   const [colourValue, setColourValue] = useState('#111111');
   const [widthValue, setWidthValue] = useState(1);
   const widthSizes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const [open, setOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const showError = (errMessage: string) => {
+    setOpen(true);
+    setErrorMessage(errMessage);
+  };
+
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const handleSaveImage = async () => {
+    console.log(id, email);
+    if (id == null || email == null) {
+      showError('User is not defined');
+      throw new SyntaxError('User is not defined');
+    }
+    try {
+      await canvasService.saveImage(id!, email!, canvas.toDataURL());
+      dispatch(clearCanvas());
+      console.log('saved');
+    } catch {
+      (err: Error) => showError(err.message);
+    }
+  };
 
   const chooseColour = (event: React.ChangeEvent<HTMLInputElement>) => {
     setColourValue(event.target.value);
@@ -93,6 +129,11 @@ const Toolbar = () => {
 
   return (
     <ToolbarDiv>
+      <Error
+        errorMessage={errorMessage}
+        open={open}
+        handleClose={handleClose}
+      />
       <Button variant='contained' style={toolbarBtn} onClick={chooseBrush}>
         <CreateIcon />
       </Button>
@@ -132,7 +173,7 @@ const Toolbar = () => {
       <Button variant='contained' style={toolbarBtn} onClick={clear}>
         <DeleteOutlineIcon />
       </Button>
-      <Button variant='contained' style={toolbarBtn}>
+      <Button variant='contained' style={toolbarBtn} onClick={handleSaveImage}>
         <SaveIcon color='action' />
       </Button>
     </ToolbarDiv>

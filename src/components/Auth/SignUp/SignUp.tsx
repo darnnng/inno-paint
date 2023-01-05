@@ -55,7 +55,7 @@ const SignUp = () => {
   return (
     <div>
       <Error
-        errorMessage={errorMessage}
+        errorMessage={errorMessage.slice(9)}
         open={open}
         handleClose={handleClose}
       />

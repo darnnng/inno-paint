@@ -18,7 +18,7 @@ const Error = ({
       onClose={handleClose}
     >
       <Alert variant='filled' severity='error'>
-        {errorMessage.slice(9)}
+        {errorMessage}
       </Alert>
     </Snackbar>
   );
