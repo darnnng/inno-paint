@@ -3,33 +3,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Canvas } from './Canvas/Canvas';
 import { Toolbar } from './Canvas/Toolbar';
-
-const gridstyle: any = {
-  justifyContent: 'center',
-  margin: 'auto',
-  marginTop: '60px',
-  alignItems: 'center',
-  height: '600px',
-  width: '800px',
-  backgroundColor: 'white',
-};
-
-export const btnBack: any = {
-  position: 'absolute',
-  top: '20px',
-  right: '30px',
-  fontFamily: 'Raleway',
-};
-
-const link: any = {
-  color: 'white',
-  textDecoration: 'none',
-};
+import { link } from './editorstyles';
 
 const Editor = () => {
   return (
     <div>
-      <Button style={btnBack} variant='contained'>
+      <Button
+        sx={{ position: 'absolute', top: '20px', right: '30px' }}
+        variant='contained'
+      >
         <Link style={link} to='/gallery'>
           Back
         </Link>

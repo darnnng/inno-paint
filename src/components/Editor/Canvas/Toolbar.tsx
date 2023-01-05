@@ -31,31 +31,7 @@ import Line from '../../../tools/Line';
 import Star from '../../../tools/Star';
 import Triangle from '../../../tools/Triangle';
 import Polygon from '../../../tools/Polygon';
-
-const toolbar: any = {
-  height: '45px',
-  backgroundColor: 'white',
-  display: 'flex',
-  alignItems: 'center',
-  position: 'absolute',
-  top: '20px',
-  left: '23.7%',
-  width: '800px',
-  margin: 'auto',
-  boxShadow: '0 4px 5px gray',
-  justifyContent: 'space-between',
-  paddingLeft: '10px',
-  paddingRight: '10px',
-  color: 'black',
-  borderRadius: '10px',
-};
-
-const toolbarBtn: any = {
-  width: '15px',
-  height: '25px',
-  backgroundColor: 'white',
-  color: 'black',
-};
+import { ToolbarDiv, toolbarBtn } from '../editorstyles';
 
 const Toolbar = () => {
   const dispatch = useAppDispatch();
@@ -116,7 +92,7 @@ const Toolbar = () => {
   };
 
   return (
-    <Grid style={toolbar} container>
+    <ToolbarDiv>
       <Button variant='contained' style={toolbarBtn} onClick={chooseBrush}>
         <CreateIcon />
       </Button>
@@ -159,7 +135,7 @@ const Toolbar = () => {
       <Button variant='contained' style={toolbarBtn}>
         <SaveIcon color='action' />
       </Button>
-    </Grid>
+    </ToolbarDiv>
   );
 };
 

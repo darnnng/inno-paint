@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import React from 'react';
 import { Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { textField, btn } from '../authstyles';
+import { btn } from '../authstyles';
 
 interface FormProps {
   title: string;
@@ -33,7 +33,7 @@ const Form: FC<FormProps> = ({ title, handleClick }) => {
         label='Email'
         placeholder='Enter email'
         variant='outlined'
-        style={textField}
+        sx={{ mt: 2, mb: 0.5 }}
         color='primary'
         type='email'
         name='email'
@@ -42,7 +42,7 @@ const Form: FC<FormProps> = ({ title, handleClick }) => {
 
       <TextField
         fullWidth
-        style={textField}
+        sx={{ mt: 2, mb: 0.5 }}
         label='Password'
         placeholder='Enter password'
         variant='outlined'

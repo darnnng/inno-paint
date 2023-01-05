@@ -5,25 +5,9 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../firebase';
 import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { setUser } from '../../../store/slices/userSlice';
-import {
-  Grid,
-  Paper,
-  Avatar,
-  Typography,
-  TextField,
-  Snackbar,
-  Alert,
-} from '@mui/material';
+import { Grid, Paper, Avatar, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import {
-  avatar,
-  gridMainStyle,
-  gridStyle,
-  link,
-  linktext,
-  paperStyle,
-  title,
-} from '../authstyles';
+import { link, PaperStyled } from '../authstyles';
 import { Error } from '../../general/ErrorToast/Error';
 //import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
@@ -69,16 +53,20 @@ const SignIn = () => {
         open={open}
         handleClose={handleClose}
       />
-      <Grid style={gridMainStyle}>
-        <Paper style={paperStyle} elevation={10}>
-          <Grid container direction='column' style={gridStyle}>
-            <Avatar style={avatar}>
+      <Grid sx={{ m: 0, justifyContent: 'center', alignItems: 'center' }}>
+        <PaperStyled>
+          <Grid
+            container
+            direction='column'
+            sx={{ p: 3, alignItems: 'center', justifyContent: 'center' }}
+          >
+            <Avatar sx={{ backgroundColor: '#6666ff', mb: 1 }}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography style={title} variant='h4'>
+            <Typography sx={{ fontFamily: 'Raleway', mb: 1 }} variant='h4'>
               Sign in
             </Typography>
-            <Typography style={linktext}>
+            <Typography sx={{ fontFamily: 'Raleway' }}>
               Don't have an account yet?
               <span>
                 <Link style={link} to='/signup'>
@@ -88,7 +76,7 @@ const SignIn = () => {
             </Typography>
             <Form title='Sign in' handleClick={handleLogin} />
           </Grid>
-        </Paper>
+        </PaperStyled>
       </Grid>
     </div>
   );

@@ -12,22 +12,13 @@ import { auth } from '../../../firebase';
 import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { Grid, Paper, Avatar } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import {
-  avatar,
-  gridMainStyle,
-  gridStyle,
-  link,
-  linktext,
-  paperStyle,
-  title,
-} from '../authstyles';
+import { link, PaperStyled } from '../authstyles';
 import Typography from '@mui/material/Typography';
 import { Error } from '../../general/ErrorToast/Error';
 
 const SignUp = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [user, setCurrentUser] = React.useState({});
   const [open, setOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -68,16 +59,20 @@ const SignUp = () => {
         open={open}
         handleClose={handleClose}
       />
-      <Grid style={gridMainStyle}>
-        <Paper style={paperStyle} elevation={10}>
-          <Grid container direction='column' style={gridStyle}>
-            <Avatar style={avatar}>
+      <Grid sx={{ m: 0, justifyContent: 'center', alignItems: 'center' }}>
+        <PaperStyled>
+          <Grid
+            container
+            direction='column'
+            sx={{ p: 3, alignItems: 'center', justifyContent: 'center' }}
+          >
+            <Avatar sx={{ backgroundColor: '#6666ff', mb: 1 }}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography style={title} variant='h4'>
+            <Typography sx={{ fontFamily: 'Raleway', mb: 1 }} variant='h4'>
               Sign up
             </Typography>
-            <Typography style={linktext}>
+            <Typography sx={{ fontFamily: 'Raleway' }}>
               Already have an account?
               <span>
                 <Link style={link} to='/'>
@@ -87,7 +82,7 @@ const SignUp = () => {
             </Typography>
             <Form title='Sign up' handleClick={handleSignUp} />
           </Grid>
-        </Paper>
+        </PaperStyled>
       </Grid>
     </div>
   );

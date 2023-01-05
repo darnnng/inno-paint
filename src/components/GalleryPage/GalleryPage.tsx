@@ -17,14 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/redux-hooks';
 import { useAuth } from '../../hooks/useAuth';
 import { removeUser } from '../../store/slices/userSlice';
-import {
-  galleryGrid,
-  linkeditor,
-  logout,
-  selectForm,
-  titleMain,
-  titleSmall,
-} from './gallerystyles';
+import { linkeditor, TitleMain, TitleSmall } from './gallerystyles';
 
 const GalleryPage = () => {
   const dispatch = useAppDispatch();
@@ -44,23 +37,33 @@ const GalleryPage = () => {
 
   return (
     <div>
-      <Grid container direction='column' style={galleryGrid}>
-        <Typography variant='h4' style={titleMain}>
-          Welcome, {email}!
-        </Typography>
-        <Typography variant='h5' style={titleSmall}>
+      <Grid
+        container
+        direction='column'
+        sx={{ m: 0, justifyContent: 'center', alignItems: 'center' }}
+      >
+        <TitleMain>Welcome, {email}!</TitleMain>
+        <TitleSmall>
           Check out the latest paintings or{' '}
           <Link style={linkeditor} to='/editor'>
             {' '}
             create something new
           </Link>
-        </Typography>
+        </TitleSmall>
 
-        <Button style={logout} variant='contained' onClick={handleLogout}>
+        <Button
+          sx={{
+            position: 'absolute',
+            top: '30px',
+            right: '30px',
+          }}
+          variant='contained'
+          onClick={handleLogout}
+        >
           Log out
         </Button>
 
-        <FormControl style={selectForm}>
+        <FormControl sx={{ width: 300, mt: '30px' }}>
           <InputLabel id='select-label'>User</InputLabel>
           <Select
             labelId='select-label'

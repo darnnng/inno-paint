@@ -1,35 +1,24 @@
-export const galleryGrid: any = {
-  margin: 0,
-  justifyContent: 'center',
-  alignItems: 'center',
-};
+import { styled } from '@mui/material';
+import { CSSProperties } from 'react';
 
-export const titleMain: any = {
+export const TitleMain = styled('h4')({
   fontFamily: 'Raleway',
   color: 'white',
   marginTop: '50px',
+  marginBottom: '5px',
   fontWeight: 'bold',
-};
+  fontSize: '32px',
+});
 
-export const titleSmall: any = {
+export const TitleSmall = styled('h5')({
   fontFamily: 'Raleway',
+  fontSize: '26px',
+  marginBottom: '10px',
   color: 'white',
   marginTop: '20px',
   fontWeight: 'bold',
-};
+});
 
-export const logout: any = {
-  position: 'absolute',
-  top: '30px',
-  right: '30px',
-  fontFamily: 'Raleway',
-};
-
-export const selectForm: any = {
-  width: '300px',
-  marginTop: '30px',
-};
-
-export const linkeditor: any = {
+export const linkeditor: CSSProperties = {
   color: 'white',
 };
