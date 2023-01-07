@@ -7,6 +7,7 @@ import {
   SelectChangeEvent,
   FormControl,
   Paper,
+  Box,
 } from '@mui/material';
 import { collection, onSnapshot, query } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
@@ -28,19 +29,17 @@ const GalleryPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [user, setUser] = useState('');
-  const [emailList, setEmailList] = useState<any>([]);
-  const [imagesList, setImagesList] = useState<any>([]);
+  const [emailList, setEmailList] = useState<string[]>([]);
+  const [imagesList, setImagesList] = useState<string[]>([]);
 
   useEffect(() => {
     const emailsCollection = collection(db, 'users');
     const unsubscribe = onSnapshot(query(emailsCollection), (querySnapshot) => {
-      const emailsArr: any = [];
+      const emailsArr: string[] = [];
       querySnapshot.forEach((doc) => {
         emailsArr.push(doc.data().email);
       });
       setEmailList(emailsArr);
-
-      console.log(emailList);
     });
     return () => unsubscribe();
   }, []);
@@ -67,7 +66,7 @@ const GalleryPage = () => {
     const unsubscribe = onSnapshot(
       galleryService.getAllImages(),
       (querySnapshot) => {
-        const imagesArr: any = [];
+        const imagesArr: string[] = [];
         querySnapshot.forEach((doc) => {
           imagesArr.push(doc.data().image);
         });
@@ -81,7 +80,7 @@ const GalleryPage = () => {
     const unsubscribe = onSnapshot(
       galleryService.getCertainImages(user),
       (querySnapshot) => {
-        const imagesArr: any = [];
+        const imagesArr: string[] = [];
         querySnapshot.forEach((doc) => {
           imagesArr.push(doc.data().image);
         });
@@ -92,7 +91,7 @@ const GalleryPage = () => {
   };
 
   return (
-    <div>
+    <Box sx={{ backgroundColor: '#c1d5f8' }}>
       <Grid
         container
         direction='column'
@@ -139,18 +138,18 @@ const GalleryPage = () => {
           </Select>
         </FormControl>
         <ImagesContainer container>
-          {imagesList == false ? (
+          {imagesList.length == 0 ? (
             <TitleSmall>No images were found</TitleSmall>
           ) : (
             imagesList.map((image: string) => (
               <Paper>
-                <img style={imgStyle} src={image} />
+                <img style={imgStyle} src={image} key={image} />
               </Paper>
             ))
           )}
         </ImagesContainer>
       </Grid>
-    </div>
+    </Box>
   );
 };
 

@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Form } from '../Form/Form';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../firebase';
 import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { setUser } from '../../../store/slices/userSlice';
-import { Grid, Paper, Avatar, Typography } from '@mui/material';
+import { Grid, Avatar, Typography, Box } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { link, PaperStyled } from '../authstyles';
+import { BoxSign, link, PaperStyled } from '../authstyles';
 import { Error } from '../../general/ErrorToast/Error';
-//import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
 const SignIn = () => {
   const dispatch = useAppDispatch();
@@ -47,13 +46,13 @@ const SignIn = () => {
   };
 
   return (
-    <div>
+    <BoxSign>
       <Error
         errorMessage={errorMessage.slice(9)}
         open={open}
         handleClose={handleClose}
       />
-      <Grid sx={{ m: 0, justifyContent: 'center', alignItems: 'center' }}>
+      <Grid sx={{ justifyContent: 'center', alignItems: 'center' }}>
         <PaperStyled>
           <Grid
             container
@@ -78,7 +77,7 @@ const SignIn = () => {
           </Grid>
         </PaperStyled>
       </Grid>
-    </div>
+    </BoxSign>
   );
 };
 

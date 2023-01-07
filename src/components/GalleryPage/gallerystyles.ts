@@ -27,6 +27,7 @@ export const ImagesContainer = styled(Grid)({
   columnGap: '30px',
   rowGap: '30px',
   marginBottom: '30px',
+  minHeight: '402px',
 });
 
 export const linkeditor: CSSProperties = {

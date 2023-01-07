@@ -1,8 +1,7 @@
 import { FC, useState } from 'react';
 import React from 'react';
-import { Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { btn } from '../authstyles';
+import { FormButton } from '../authstyles';
 
 interface FormProps {
   title: string;
@@ -51,9 +50,9 @@ const Form: FC<FormProps> = ({ title, handleClick }) => {
         onChange={handlePasswordChange}
       />
 
-      <Button fullWidth type='submit' variant='contained' style={btn}>
+      <FormButton fullWidth type='submit' variant='contained'>
         {title}
-      </Button>
+      </FormButton>
     </form>
   );
 };

@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Button,
-  Grid,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from '@mui/material';
+import { Button, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
 import CropSquareIcon from '@mui/icons-material/CropSquare';
 import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
@@ -31,7 +25,7 @@ import Line from '../../../tools/Line';
 import Star from '../../../tools/Star';
 import Triangle from '../../../tools/Triangle';
 import Polygon from '../../../tools/Polygon';
-import { ToolbarDiv, toolbarBtn } from '../editorstyles';
+import { ToolbarDiv, StyledButton } from '../editorstyles';
 import { useAuth } from '../../../hooks/useAuth';
 import { canvasService } from '../../../services/canvasService';
 import { Error } from '../../general/ErrorToast/Error';
@@ -46,6 +40,8 @@ const Toolbar = () => {
   const widthSizes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const [open, setOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  type Tools = Brush | Rectangle | Line | Circle | Triangle | Polygon | Star;
 
   const showError = (errMessage: string) => {
     setOpen(true);
@@ -63,15 +59,14 @@ const Toolbar = () => {
   };
 
   const handleSaveImage = async () => {
-    console.log(id, email);
     if (id == null || email == null) {
       showError('User is not defined');
       throw new SyntaxError('User is not defined');
     }
     try {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       await canvasService.saveImage(id!, email!, canvas.toDataURL());
       dispatch(clearCanvas());
-      console.log('saved');
     } catch {
       (err: Error) => showError(err.message);
     }
@@ -87,12 +82,11 @@ const Toolbar = () => {
     dispatch(setWidth(Number(event.target.value)));
   };
 
-  const chooseTool = (tool: any, toolName: string) => {
+  const chooseTool = (tool: Tools, toolName: string) => {
     dispatch(setTool(tool));
     dispatch(setColour(colourValue));
     dispatch(setWidth(widthValue));
     setActiveTool(toolName);
-    console.log(tool);
   };
 
   const chooseBrush = () => {
@@ -134,30 +128,30 @@ const Toolbar = () => {
         open={open}
         handleClose={handleClose}
       />
-      <Button variant='contained' style={toolbarBtn} onClick={chooseBrush}>
+      <StyledButton variant='contained' onClick={chooseBrush}>
         <CreateIcon />
-      </Button>
-      <Button variant='contained' style={toolbarBtn} onClick={chooseLine}>
+      </StyledButton>
+      <StyledButton variant='contained' onClick={chooseLine}>
         <HorizontalRuleIcon />
-      </Button>
-      <Button variant='contained' style={toolbarBtn} onClick={chooseCircle}>
+      </StyledButton>
+      <StyledButton variant='contained' onClick={chooseCircle}>
         <PanoramaFishEyeIcon />
-      </Button>
-      <Button variant='contained' style={toolbarBtn} onClick={chooseRect}>
+      </StyledButton>
+      <StyledButton variant='contained' onClick={chooseRect}>
         <CropSquareIcon />
-      </Button>
-      <Button variant='contained' style={toolbarBtn} onClick={chooseTriangle}>
+      </StyledButton>
+      <StyledButton variant='contained' onClick={chooseTriangle}>
         <ChangeHistoryIcon />
-      </Button>
-      <Button variant='contained' style={toolbarBtn} onClick={chooseStar}>
+      </StyledButton>
+      <StyledButton variant='contained' onClick={chooseStar}>
         <StarOutlineIcon />
-      </Button>
-      <Button variant='contained' style={toolbarBtn} onClick={choosePolygon}>
+      </StyledButton>
+      <StyledButton variant='contained' onClick={choosePolygon}>
         <HexagonOutlinedIcon />
-      </Button>
-      <Button variant='contained' style={toolbarBtn}>
+      </StyledButton>
+      <StyledButton variant='contained'>
         <input value={colourValue} onChange={chooseColour} type='color' />
-      </Button>
+      </StyledButton>
 
       <Select
         style={{ height: '25px' }}
@@ -170,12 +164,12 @@ const Toolbar = () => {
           </MenuItem>
         ))}
       </Select>
-      <Button variant='contained' style={toolbarBtn} onClick={clear}>
+      <StyledButton variant='contained' onClick={clear}>
         <DeleteOutlineIcon />
-      </Button>
-      <Button variant='contained' style={toolbarBtn} onClick={handleSaveImage}>
+      </StyledButton>
+      <StyledButton variant='contained' onClick={handleSaveImage}>
         <SaveIcon color='action' />
-      </Button>
+      </StyledButton>
     </ToolbarDiv>
   );
 };

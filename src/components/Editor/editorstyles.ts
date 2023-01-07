@@ -1,4 +1,4 @@
-import { styled } from '@mui/material';
+import { Button, styled } from '@mui/material';
 import { CSSProperties } from 'react';
 
 export const ToolbarDiv = styled('div')({
@@ -19,12 +19,16 @@ export const ToolbarDiv = styled('div')({
   borderRadius: '10px',
 });
 
-export const toolbarBtn: CSSProperties = {
+export const StyledButton = styled(Button)({
   width: '15px',
   height: '25px',
   backgroundColor: 'white',
   color: 'black',
-};
+  variant: 'contained',
+  '&:hover': {
+    background: 'aliceblue',
+  },
+});
 
 export const canvasBoard: CSSProperties = {
   backgroundColor: 'white',

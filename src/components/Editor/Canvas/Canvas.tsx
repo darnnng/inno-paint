@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid } from '@mui/material';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { setCanvas } from '../../../store/slices/canvasSlice';
 import Brush from '../../../tools/Brush';
