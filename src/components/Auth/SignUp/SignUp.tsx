@@ -2,19 +2,15 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { setUser } from '../../../store/slices/userSlice';
 import { Form } from '../Form/Form';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  updateEmail,
-} from 'firebase/auth';
-import { auth } from '../../../firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from '../../../firebase';
 import { useAppDispatch } from '../../../hooks/redux-hooks';
-import { Grid, Paper, Avatar } from '@mui/material';
+import { Grid, Avatar } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { link, PaperStyled } from '../authstyles';
 import Typography from '@mui/material/Typography';
 import { Error } from '../../general/ErrorToast/Error';
+import { addDoc, collection } from 'firebase/firestore';
 
 const SignUp = () => {
   const dispatch = useAppDispatch();
@@ -31,6 +27,10 @@ const SignUp = () => {
             id: user.uid,
           })
         );
+        addDoc(collection(db, `users`), {
+          email: user.email,
+        });
+
         navigate('/gallery');
       })
 

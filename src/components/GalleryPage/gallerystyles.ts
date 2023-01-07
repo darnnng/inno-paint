@@ -1,4 +1,5 @@
 import { styled } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import { CSSProperties } from 'react';
 
 export const TitleMain = styled('h4')({
@@ -19,6 +20,21 @@ export const TitleSmall = styled('h5')({
   fontWeight: 'bold',
 });
 
+export const ImagesContainer = styled(Grid)({
+  marginTop: '50px',
+  justifyContent: 'center',
+  alignItems: 'center',
+  columnGap: '30px',
+  rowGap: '30px',
+  marginBottom: '30px',
+});
+
 export const linkeditor: CSSProperties = {
   color: 'white',
+};
+
+export const imgStyle: CSSProperties = {
+  backgroundColor: 'white',
+  width: '400px',
+  height: '320px',
 };
