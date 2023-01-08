@@ -14,7 +14,7 @@ To get all the dependencies installed.
 To start the app in browser
 
 ### deploy
-
+https://minipaintinno.netlify.app/
 
 ## 3.DATABASE SNAPSHOT
 
@@ -64,6 +64,9 @@ In **src** folder there are: <br/>
 -----**general**<br/>
 -----------**ErrorToast**<br/>
 --------------Error.tsx<br/>
+-----------**Switcher**<br/>
+--------------Switch.tsx<br/>
+--------------themes.ts<br/>
 
 -**tools** in which there are files with logic for every canvas tool(brush,circle..)<br/>
 -**hooks** which stores part of redux logic <br/>
