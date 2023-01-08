@@ -9,7 +9,7 @@ export const store = configureStore({
     user: userReducer,
     canvas: canvasReducer,
     tool: toolsReducer,
-    darkTheme: themeChangeReducer,
+    theme: themeChangeReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

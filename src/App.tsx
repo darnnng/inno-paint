@@ -10,10 +10,10 @@ import { selectTheme } from './store/slices/themeChangeSlice';
 import { dark, light } from './components/general/Switcher/themes';
 
 function App() {
-  const { darkTheme } = useAppSelector(selectTheme);
+  const { theme } = useAppSelector(selectTheme);
 
   return (
-    <ThemeProvider theme={darkTheme ? dark : light}>
+    <ThemeProvider theme={theme ? dark : light}>
       <Routes>
         <Route path='/' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />

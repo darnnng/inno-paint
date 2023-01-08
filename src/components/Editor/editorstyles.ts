@@ -6,11 +6,10 @@ export const ToolbarDiv = styled('div')({
   backgroundColor: 'white',
   display: 'flex',
   alignItems: 'center',
-  position: 'absolute',
-  top: '20px',
-  left: '23.7%',
+
   width: '800px',
   margin: 'auto',
+  marginBottom: '0',
   boxShadow: '0 4px 5px gray',
   justifyContent: 'space-between',
   paddingLeft: '10px',
@@ -39,8 +38,9 @@ export const BackButton = styled(Button)({
 });
 
 export const CanvasGrid = styled(Grid)({
-  height: '100vh',
+  height: '650px',
   display: 'flex',
+  marginTop: '0',
   justifyContent: 'center',
   alignItems: 'center',
 });

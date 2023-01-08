@@ -63,8 +63,8 @@ export class Triangle extends Tool {
         }
         angle = (Math.PI * i) / (arms / 2);
         this.ctx?.lineTo(
-          x + radius * Math.cos(angle) + 1,
-          y + radius * Math.sin(angle) + 1
+          x + radius * Math.sin(angle) + 1,
+          y + radius * Math.cos(angle) + 1
         );
       }
       this.ctx?.closePath();

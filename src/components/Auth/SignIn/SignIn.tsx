@@ -50,7 +50,6 @@ const SignIn = () => {
 
   const handleThemeChange = () => {
     dispatch(setTheme());
-    console.log(theme);
   };
 
   return (
