@@ -1,4 +1,4 @@
-import { styled } from '@mui/material';
+import { Button, styled } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { CSSProperties } from 'react';
 
@@ -28,6 +28,13 @@ export const ImagesContainer = styled(Grid)({
   rowGap: '30px',
   marginBottom: '30px',
   minHeight: '402px',
+});
+
+export const LogoutButton = styled(Button)({
+  position: 'absolute',
+  top: '30px',
+  right: '30px',
+  color: 'white',
 });
 
 export const linkeditor: CSSProperties = {

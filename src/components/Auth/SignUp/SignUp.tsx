@@ -4,19 +4,22 @@ import { setUser } from '../../../store/slices/userSlice';
 import { Form } from '../Form/Form';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../../firebase';
-import { useAppDispatch } from '../../../hooks/redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux-hooks';
 import { Grid, Avatar, Box } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { link, PaperStyled } from '../authstyles';
+import { BoxSign, link, PaperStyled } from '../authstyles';
 import Typography from '@mui/material/Typography';
 import { Error } from '../../general/ErrorToast/Error';
 import { addDoc, collection } from 'firebase/firestore';
+import { selectTheme, setTheme } from '../../../store/slices/themeChangeSlice';
+import { MaterialUISwitch } from '../../general/Switcher/Switch';
 
 const SignUp = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const { theme } = useAppSelector(selectTheme);
 
   const handleSignUp = (email: string, password: string) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -52,17 +55,13 @@ const SignUp = () => {
     setOpen(false);
   };
 
+  const handleThemeChange = () => {
+    dispatch(setTheme());
+  };
+
   return (
-    <Box
-      sx={{
-        backgroundColor: '#c1d5f8',
-        position: 'fixed',
-        top: '0',
-        width: '100%',
-        height: '100vh',
-        m: 0,
-      }}
-    >
+    <BoxSign>
+      <MaterialUISwitch checked={theme} onChange={handleThemeChange} />
       <Error
         errorMessage={errorMessage.slice(9)}
         open={open}
@@ -93,7 +92,7 @@ const SignUp = () => {
           </Grid>
         </PaperStyled>
       </Grid>
-    </Box>
+    </BoxSign>
   );
 };
 

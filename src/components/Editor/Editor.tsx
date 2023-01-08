@@ -1,21 +1,28 @@
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
+import { selectTheme, setTheme } from '../../store/slices/themeChangeSlice';
+import { MaterialUISwitch } from '../general/Switcher/Switch';
 import { Canvas } from './Canvas/Canvas';
 import { Toolbar } from './Canvas/Toolbar';
-import { link } from './editorstyles';
+import { BackButton, link } from './editorstyles';
 
 const Editor = () => {
+  const dispatch = useAppDispatch();
+  const { theme } = useAppSelector(selectTheme);
+  const handleThemeChange = () => {
+    dispatch(setTheme());
+  };
+
   return (
-    <Box sx={{ backgroundColor: '#c1d5f8' }}>
-      <Button
-        sx={{ position: 'absolute', top: '20px', right: '30px' }}
-        variant='contained'
-      >
+    <Box sx={{ bgcolor: 'primary.main' }}>
+      <MaterialUISwitch checked={theme} onChange={handleThemeChange} />
+      <BackButton sx={{ bgcolor: 'secondary.main' }} variant='contained'>
         <Link style={link} to='/gallery'>
           Back
         </Link>
-      </Button>
+      </BackButton>
       <Toolbar />
       <Canvas />
     </Box>

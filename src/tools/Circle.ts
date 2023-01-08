@@ -1,6 +1,6 @@
 import { Tool } from './ToolClass';
 
-export default class Circle extends Tool {
+export class Circle extends Tool {
   mouseDown: boolean;
   startX: number;
   startY: number;

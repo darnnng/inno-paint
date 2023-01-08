@@ -17,6 +17,7 @@ export const FormButton = styled(Button)({
   height: 50,
   marginTop: 40,
   fontFamily: 'Raleway',
+  color: 'white',
 });
 
 export const BoxSign = styled(Box)({

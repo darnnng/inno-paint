@@ -1,6 +1,6 @@
 import { Tool } from './ToolClass';
 
-export default class Polygon extends Tool {
+export class Polygon extends Tool {
   mouseDown: boolean;
   startX: number;
   startY: number;

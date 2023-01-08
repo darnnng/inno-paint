@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import Brush from '../../tools/Brush';
-import Circle from '../../tools/Circle';
-import Line from '../../tools/Line';
-import Polygon from '../../tools/Polygon';
-import Rectangle from '../../tools/Rectangle';
-import Star from '../../tools/Star';
-import Triangle from '../../tools/Triangle';
+import { Brush } from '../../tools/Brush';
+import { Circle } from '../../tools/Circle';
+import { Line } from '../../tools/Line';
+import { Polygon } from '../../tools/Polygon';
+import { Rectangle } from '../../tools/Rectangle';
+import { Star } from '../../tools/Star';
+import { Triangle } from '../../tools/Triangle';
 
 interface ITool {
   tool:

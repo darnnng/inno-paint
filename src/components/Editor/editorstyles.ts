@@ -1,4 +1,4 @@
-import { Button, styled } from '@mui/material';
+import { Button, Grid, styled } from '@mui/material';
 import { CSSProperties } from 'react';
 
 export const ToolbarDiv = styled('div')({
@@ -28,6 +28,21 @@ export const StyledButton = styled(Button)({
   '&:hover': {
     background: 'aliceblue',
   },
+});
+
+export const BackButton = styled(Button)({
+  position: 'absolute',
+  top: '20px',
+  right: '30px',
+
+  color: 'text.main',
+});
+
+export const CanvasGrid = styled(Grid)({
+  height: '100vh',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 });
 
 export const canvasBoard: CSSProperties = {

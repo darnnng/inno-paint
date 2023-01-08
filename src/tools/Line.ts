@@ -1,6 +1,6 @@
 import { Tool } from './ToolClass';
 
-export default class Line extends Tool {
+export class Line extends Tool {
   mouseDown: boolean;
   curX: number;
   curY: number;

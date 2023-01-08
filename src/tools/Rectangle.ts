@@ -1,6 +1,6 @@
 import { Tool } from './ToolClass';
 
-export default class Rectangle extends Tool {
+export class Rectangle extends Tool {
   mouseDown: boolean;
   startX: number;
   startY: number;

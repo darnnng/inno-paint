@@ -1,6 +1,6 @@
 import { Tool } from './ToolClass';
 
-export default class Star extends Tool {
+export class Star extends Tool {
   mouseDown: boolean;
   startX: number;
   startY: number;

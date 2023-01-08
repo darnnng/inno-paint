@@ -3,9 +3,9 @@ import { Grid } from '@mui/material';
 import { useRef, useEffect } from 'react';
 import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { setCanvas } from '../../../store/slices/canvasSlice';
-import Brush from '../../../tools/Brush';
+import { Brush } from '../../../tools/Brush';
 import { setTool } from '../../../store/slices/toolSlice';
-import { canvasBoard } from '../editorstyles';
+import { canvasBoard, CanvasGrid } from '../editorstyles';
 
 const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -19,16 +19,9 @@ const Canvas = () => {
   }, []);
 
   return (
-    <Grid
-      sx={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <CanvasGrid>
       <canvas ref={canvasRef} style={canvasBoard} width={950} height={550} />
-    </Grid>
+    </CanvasGrid>
   );
 };
 

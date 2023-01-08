@@ -3,18 +3,21 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Form } from '../Form/Form';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../firebase';
-import { useAppDispatch } from '../../../hooks/redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux-hooks';
 import { setUser } from '../../../store/slices/userSlice';
 import { Grid, Avatar, Typography, Box } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { BoxSign, link, PaperStyled } from '../authstyles';
 import { Error } from '../../general/ErrorToast/Error';
+import { MaterialUISwitch } from '../../general/Switcher/Switch';
+import { selectTheme, setTheme } from '../../../store/slices/themeChangeSlice';
 
 const SignIn = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const { theme } = useAppSelector(selectTheme);
 
   const handleLogin = (email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
@@ -45,8 +48,14 @@ const SignIn = () => {
     setOpen(false);
   };
 
+  const handleThemeChange = () => {
+    dispatch(setTheme());
+    console.log(theme);
+  };
+
   return (
-    <BoxSign>
+    <BoxSign sx={{ bgcolor: 'primary.main' }}>
+      <MaterialUISwitch checked={theme} onChange={handleThemeChange} />
       <Error
         errorMessage={errorMessage.slice(9)}
         open={open}

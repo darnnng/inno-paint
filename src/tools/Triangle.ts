@@ -1,6 +1,6 @@
 import { Tool } from './ToolClass';
 
-export default class Triangle extends Tool {
+export class Triangle extends Tool {
   mouseDown: boolean;
   startX: number;
   startY: number;

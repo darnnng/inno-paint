@@ -14,13 +14,16 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase';
-import { useAppDispatch } from '../../hooks/redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { galleryService } from '../../services/galleryService';
+import { selectTheme, setTheme } from '../../store/slices/themeChangeSlice';
 import { removeUser } from '../../store/slices/userSlice';
+import { MaterialUISwitch } from '../general/Switcher/Switch';
 import {
   ImagesContainer,
   imgStyle,
   linkeditor,
+  LogoutButton,
   TitleMain,
   TitleSmall,
 } from './gallerystyles';
@@ -31,6 +34,12 @@ const GalleryPage = () => {
   const [user, setUser] = useState('');
   const [emailList, setEmailList] = useState<string[]>([]);
   const [imagesList, setImagesList] = useState<string[]>([]);
+
+  const { theme } = useAppSelector(selectTheme);
+
+  const handleThemeChange = () => {
+    dispatch(setTheme());
+  };
 
   useEffect(() => {
     const emailsCollection = collection(db, 'users');
@@ -91,7 +100,8 @@ const GalleryPage = () => {
   };
 
   return (
-    <Box sx={{ backgroundColor: '#c1d5f8' }}>
+    <Box sx={{ bgcolor: 'primary.main' }}>
+      <MaterialUISwitch checked={theme} onChange={handleThemeChange} />
       <Grid
         container
         direction='column'
@@ -106,26 +116,27 @@ const GalleryPage = () => {
           </Link>
         </TitleSmall>
 
-        <Button
+        <LogoutButton
           sx={{
-            position: 'absolute',
-            top: '30px',
-            right: '30px',
+            bgcolor: 'secondary.main',
           }}
           variant='contained'
           onClick={handleLogout}
         >
           Log out
-        </Button>
+        </LogoutButton>
 
         <FormControl sx={{ width: 300, mt: '30px' }}>
-          <InputLabel id='select-label'>Choose the user</InputLabel>
+          <InputLabel sx={{ color: 'black' }} id='select-label'>
+            Choose the user
+          </InputLabel>
           <Select
             labelId='select-label'
             id='select'
             value={user}
             label='Choose the user'
             onChange={handleChangeUser}
+            sx={{ bgcolor: 'white' }}
           >
             <MenuItem value='All users' key='allusers'>
               All users
@@ -142,7 +153,7 @@ const GalleryPage = () => {
             <TitleSmall>No images were found</TitleSmall>
           ) : (
             imagesList.map((image: string) => (
-              <Paper>
+              <Paper key={image}>
                 <img style={imgStyle} src={image} key={image} />
               </Paper>
             ))
