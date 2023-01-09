@@ -57,7 +57,6 @@ const GalleryPage = () => {
 
   useEffect(() => {
     getPicturesOfAllUsers();
-    setLoading(false);
   }, []);
 
   const handleLogout = () => {
@@ -83,6 +82,7 @@ const GalleryPage = () => {
           imagesArr.push(doc.data().image);
         });
         setImagesList(imagesArr);
+        setLoading(false);
       }
     );
     return () => unsubscribe();
