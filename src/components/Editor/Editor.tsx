@@ -16,7 +16,7 @@ const Editor = () => {
   };
 
   return (
-    <Box sx={{ bgcolor: 'primary.main' }}>
+    <Box sx={{ bgcolor: 'primary.main', overflow: 'hidden' }}>
       <MaterialUISwitch checked={theme} onChange={handleThemeChange} />
       <BackButton sx={{ bgcolor: 'secondary.main' }} variant='contained'>
         <Link style={link} to='/gallery'>

@@ -18,6 +18,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { galleryService } from '../../services/galleryService';
 import { selectTheme, setTheme } from '../../store/slices/themeChangeSlice';
 import { removeUser } from '../../store/slices/userSlice';
+import { Loader } from '../general/Loader/Loader';
 import { MaterialUISwitch } from '../general/Switcher/Switch';
 import {
   ImagesContainer,
@@ -34,6 +35,7 @@ const GalleryPage = () => {
   const [user, setUser] = useState('');
   const [emailList, setEmailList] = useState<string[]>([]);
   const [imagesList, setImagesList] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const { theme } = useAppSelector(selectTheme);
 
@@ -55,6 +57,7 @@ const GalleryPage = () => {
 
   useEffect(() => {
     getPicturesOfAllUsers();
+    setLoading(false);
   }, []);
 
   const handleLogout = () => {
@@ -94,6 +97,7 @@ const GalleryPage = () => {
           imagesArr.push(doc.data().image);
         });
         setImagesList(imagesArr);
+        setLoading(false);
       }
     );
     return () => unsubscribe();
@@ -151,17 +155,22 @@ const GalleryPage = () => {
             ))}
           </Select>
         </FormControl>
-        <ImagesContainer container>
-          {imagesList.length == 0 ? (
-            <TitleSmall>No images were found</TitleSmall>
-          ) : (
-            imagesList.map((image: string) => (
-              <Paper key={image}>
-                <img style={imgStyle} src={image} key={image} />
-              </Paper>
-            ))
-          )}
-        </ImagesContainer>
+
+        {loading ? (
+          <Loader />
+        ) : (
+          <ImagesContainer container>
+            {imagesList.length == 0 ? (
+              <TitleSmall>No images were found</TitleSmall>
+            ) : (
+              imagesList.map((image: string) => (
+                <Paper key={image}>
+                  <img style={imgStyle} src={image} key={image} />
+                </Paper>
+              ))
+            )}
+          </ImagesContainer>
+        )}
       </Grid>
     </Box>
   );

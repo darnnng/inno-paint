@@ -1,4 +1,4 @@
-import { Button, styled } from '@mui/material';
+import { Box, Button, styled } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { CSSProperties } from 'react';
 
@@ -28,6 +28,17 @@ export const ImagesContainer = styled(Grid)({
   rowGap: '30px',
   marginBottom: '30px',
   minHeight: '402px',
+});
+
+export const BoxLoader = styled(Box)({
+  marginTop: '80px',
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginBottom: '30px',
+  minHeight: '402px',
+  color: 'white',
+  fontFamily: 'Raleway',
+  fontSize: '34px',
 });
 
 export const LogoutButton = styled(Button)({
