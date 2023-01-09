@@ -57,9 +57,9 @@ export class Triangle extends Tool {
       this.ctx?.beginPath();
       for (let i = 0; i < arms + 1; i++) {
         if (i % 2 == 0) {
-          radius = Math.sqrt(width ** 2 + height ** 2);
-        } else {
           radius = Math.sqrt(width ** 2 + height ** 2) * 0.5;
+        } else {
+          radius = Math.sqrt(width ** 2 + height ** 2);
         }
         angle = (Math.PI * i) / (arms / 2);
         this.ctx?.lineTo(

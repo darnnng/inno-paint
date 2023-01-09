@@ -33,7 +33,7 @@ const Form: FC<FormProps> = ({ title, handleClick }) => {
         placeholder='Enter email'
         variant='outlined'
         sx={{ mt: 2, mb: 0.5 }}
-        color='primary'
+        color='secondary'
         type='email'
         name='email'
         onChange={handleEmailChange}
@@ -44,6 +44,7 @@ const Form: FC<FormProps> = ({ title, handleClick }) => {
         sx={{ mt: 2, mb: 0.5 }}
         label='Password'
         placeholder='Enter password'
+        color='secondary'
         variant='outlined'
         type='password'
         name='password'

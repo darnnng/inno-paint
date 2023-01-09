@@ -127,14 +127,17 @@ const GalleryPage = () => {
         </LogoutButton>
 
         <FormControl sx={{ width: 300, mt: '30px' }}>
-          <InputLabel sx={{ color: 'black' }} id='select-label'>
+          <InputLabel
+            sx={{ bgcolor: 'primary' }}
+            color='secondary'
+            id='select-label'
+          >
             Choose the user
           </InputLabel>
           <Select
             labelId='select-label'
             id='select'
             value={user}
-            label='Choose the user'
             onChange={handleChangeUser}
             sx={{ bgcolor: 'white' }}
           >
