@@ -1,15 +1,17 @@
 import React from 'react';
-import { Button, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import CreateIcon from '@mui/icons-material/Create';
-import CropSquareIcon from '@mui/icons-material/CropSquare';
-import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
-import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
-import SaveIcon from '@mui/icons-material/Save';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import StarOutlineIcon from '@mui/icons-material/StarOutline';
+import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import {
+  Create,
+  CropSquare,
+  PanoramaFishEye,
+  HorizontalRule,
+  Save,
+  DeleteOutline,
+  StarOutline,
+  HexagonOutlined,
+  ChangeHistory,
+} from '@mui/icons-material';
 import { Brush } from '../../../tools/Brush';
-import ChangeHistoryIcon from '@mui/icons-material/ChangeHistory';
-import HexagonOutlinedIcon from '@mui/icons-material/HexagonOutlined';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux-hooks';
 import {
   setTool,
@@ -64,7 +66,6 @@ const Toolbar = () => {
       throw new SyntaxError('User is not defined');
     }
     try {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       await canvasService.saveImage(id!, email!, canvas.toDataURL());
       dispatch(clearCanvas());
     } catch {
@@ -129,25 +130,25 @@ const Toolbar = () => {
         handleClose={handleClose}
       />
       <StyledButton variant='contained' onClick={chooseBrush}>
-        <CreateIcon />
+        <Create />
       </StyledButton>
       <StyledButton variant='contained' onClick={chooseLine}>
-        <HorizontalRuleIcon />
+        <HorizontalRule />
       </StyledButton>
       <StyledButton variant='contained' onClick={chooseCircle}>
-        <PanoramaFishEyeIcon />
+        <PanoramaFishEye />
       </StyledButton>
       <StyledButton variant='contained' onClick={chooseRect}>
-        <CropSquareIcon />
+        <CropSquare />
       </StyledButton>
       <StyledButton variant='contained' onClick={chooseTriangle}>
-        <ChangeHistoryIcon />
+        <ChangeHistory />
       </StyledButton>
       <StyledButton variant='contained' onClick={chooseStar}>
-        <StarOutlineIcon />
+        <StarOutline />
       </StyledButton>
       <StyledButton variant='contained' onClick={choosePolygon}>
-        <HexagonOutlinedIcon />
+        <HexagonOutlined />
       </StyledButton>
       <StyledButton variant='contained'>
         <input value={colourValue} onChange={chooseColour} type='color' />
@@ -158,17 +159,17 @@ const Toolbar = () => {
         value={widthValue}
         onChange={chooseWidth}
       >
-        {widthSizes.map((i) => (
-          <MenuItem key={i} value={i}>
-            {i}px
+        {widthSizes.map((width) => (
+          <MenuItem key={width} value={width}>
+            {width}px
           </MenuItem>
         ))}
       </Select>
       <StyledButton variant='contained' onClick={clear}>
-        <DeleteOutlineIcon />
+        <DeleteOutline />
       </StyledButton>
       <StyledButton variant='contained' onClick={handleSaveImage}>
-        <SaveIcon color='action' />
+        <Save color='action' />
       </StyledButton>
     </ToolbarDiv>
   );
