@@ -10,6 +10,13 @@ export const light = createTheme({
     },
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          margin: 0,
+        },
+      },
+    },
     MuiSwitch: {
       styleOverrides: {
         switchBase: {
@@ -69,7 +76,15 @@ export const dark = createTheme({
       main: '#c1d5f8',
     },
   },
+
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          margin: 0,
+        },
+      },
+    },
     MuiSwitch: {
       styleOverrides: {
         switchBase: {
