@@ -9,12 +9,10 @@ export class Tool {
   }
 
   set lineColour(color: string) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.ctx!.strokeStyle = color;
   }
 
   set lineWidth(width: number) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.ctx!.lineWidth = width;
   }
 
