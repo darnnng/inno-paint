@@ -5,11 +5,10 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../firebase';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux-hooks';
 import { setUser } from '../../../store/slices/userSlice';
-import { Grid, Avatar, Typography, Box } from '@mui/material';
+import { Grid, Avatar, Typography, Box, Switch } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { BoxSign, link, PaperStyled } from '../authstyles';
 import { Error } from '../../general/ErrorToast/Error';
-import { MaterialUISwitch } from '../../general/Switcher/Switch';
 import { selectTheme, setTheme } from '../../../store/slices/themeChangeSlice';
 
 const SignIn = () => {
@@ -54,7 +53,17 @@ const SignIn = () => {
 
   return (
     <BoxSign sx={{ bgcolor: 'primary.main' }}>
-      <MaterialUISwitch checked={theme} onChange={handleThemeChange} />
+      <Switch
+        sx={{
+          width: '62px',
+          height: '34px',
+          padding: '7px',
+          top: '8px',
+          left: '5px',
+        }}
+        checked={theme}
+        onChange={handleThemeChange}
+      />
       <Error
         errorMessage={errorMessage.slice(9)}
         open={open}

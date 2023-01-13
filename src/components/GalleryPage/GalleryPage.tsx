@@ -8,6 +8,7 @@ import {
   FormControl,
   Paper,
   Box,
+  Switch,
 } from '@mui/material';
 import { collection, onSnapshot, query } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
@@ -19,7 +20,7 @@ import { galleryService } from '../../services/galleryService';
 import { selectTheme, setTheme } from '../../store/slices/themeChangeSlice';
 import { removeUser } from '../../store/slices/userSlice';
 import { Loader } from '../general/Loader/Loader';
-import { MaterialUISwitch } from '../general/Switcher/Switch';
+
 import {
   ImagesContainer,
   imgStyle,
@@ -105,7 +106,17 @@ const GalleryPage = () => {
 
   return (
     <Box sx={{ bgcolor: 'primary.main' }}>
-      <MaterialUISwitch checked={theme} onChange={handleThemeChange} />
+      <Switch
+        sx={{
+          width: '62px',
+          height: '34px',
+          padding: '7px',
+          top: '8px',
+          left: '5px',
+        }}
+        checked={theme}
+        onChange={handleThemeChange}
+      />
       <Grid
         container
         direction='column'
