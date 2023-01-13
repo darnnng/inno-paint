@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { GalleryPage } from './components/GalleryPage/GalleryPage';
 import { SignIn } from './components/Auth/SignIn/SignIn';
 import { SignUp } from './components/Auth/SignUp/SignUp';
@@ -15,7 +15,8 @@ function App() {
   return (
     <ThemeProvider theme={theme ? dark : light}>
       <Routes>
-        <Route path='/' element={<SignIn />} />
+        <Route path='/' element={<Navigate to={'/signin'} replace />} />
+        <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/gallery' element={<GalleryPage />} />
         <Route path='/editor' element={<Editor />} />

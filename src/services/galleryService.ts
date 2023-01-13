@@ -1,10 +1,7 @@
 import { collection, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
+import { IGalleryService } from '../interfaces/IGalleryService.interface';
 
-export interface IGalleryService {
-  getAllImages: () => void;
-  getCertainImages: (user: string) => void;
-}
 class GalleryService implements IGalleryService {
   getAllImages() {
     const imagesCollection = collection(db, 'images');

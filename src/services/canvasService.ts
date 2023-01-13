@@ -1,9 +1,7 @@
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../firebase';
+import { ICanvasService } from '../interfaces/ICanvasService.interface';
 
-export interface ICanvasService {
-  saveImage: (userId: string, email: string, image: string) => void;
-}
 class CanvasService implements ICanvasService {
   saveImage(userId: string, email: string, image: string) {
     return addDoc(collection(db, `images`), {
