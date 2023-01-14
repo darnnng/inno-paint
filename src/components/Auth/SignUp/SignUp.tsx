@@ -86,10 +86,10 @@ const SignUp = () => {
             <Avatar sx={{ backgroundColor: '#6666ff', mb: 1 }}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography sx={{ fontFamily: 'Raleway', mb: 1 }} variant='h4'>
+            <Typography sx={{ mb: 1 }} variant='h4'>
               Sign up
             </Typography>
-            <Typography sx={{ fontFamily: 'Raleway' }}>
+            <Typography>
               Already have an account?
               <span>
                 <Link style={link} to='/'>

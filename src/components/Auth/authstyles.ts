@@ -9,14 +9,12 @@ export const PaperStyled = styled(Paper)({
   width: 550,
   margin: '100px auto',
   borderRadius: 25,
-  fontFamily: 'Raleway',
 });
 
 export const FormButton = styled(Button)({
   backgroundColor: '#6666ff',
   height: 50,
   marginTop: 40,
-  fontFamily: 'Raleway',
   color: 'white',
 });
 

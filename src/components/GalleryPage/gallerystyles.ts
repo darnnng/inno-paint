@@ -3,7 +3,6 @@ import Grid from '@mui/material/Grid';
 import { CSSProperties } from 'react';
 
 export const TitleMain = styled('h4')({
-  fontFamily: 'Raleway',
   color: 'white',
   marginTop: '50px',
   marginBottom: '5px',
@@ -12,7 +11,6 @@ export const TitleMain = styled('h4')({
 });
 
 export const TitleSmall = styled('h5')({
-  fontFamily: 'Raleway',
   fontSize: '26px',
   marginBottom: '10px',
   color: 'white',
@@ -37,7 +35,6 @@ export const BoxLoader = styled(Box)({
   marginBottom: '30px',
   minHeight: '402px',
   color: 'white',
-  fontFamily: 'Raleway',
   fontSize: '34px',
 });
 
