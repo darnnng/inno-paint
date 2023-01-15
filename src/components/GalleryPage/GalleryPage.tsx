@@ -17,8 +17,10 @@ import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { galleryService } from '../../services/galleryService';
+import { selectImagesList, setImagesList } from '../../store/slices/imageSlice';
 import { selectTheme, setTheme } from '../../store/slices/themeChangeSlice';
 import { removeUser } from '../../store/slices/userSlice';
+import { selectEmailList, setEmailList } from '../../store/slices/usersSlice';
 import { Loader } from '../general/Loader/Loader';
 
 import {
@@ -34,11 +36,11 @@ const GalleryPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [user, setUser] = useState('');
-  const [emailList, setEmailList] = useState<string[]>([]);
-  const [imagesList, setImagesList] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   const { theme } = useAppSelector(selectTheme);
+  const { emailList } = useAppSelector(selectEmailList);
+  const { imagesList } = useAppSelector(selectImagesList);
 
   const handleThemeChange = () => {
     dispatch(setTheme());
@@ -51,7 +53,7 @@ const GalleryPage = () => {
       querySnapshot.forEach((doc) => {
         emailsArr.push(doc.data().email);
       });
-      setEmailList(emailsArr);
+      dispatch(setEmailList(emailsArr));
     });
     return () => unsubscribe();
   }, []);
@@ -82,7 +84,7 @@ const GalleryPage = () => {
         querySnapshot.forEach((doc) => {
           imagesArr.push(doc.data().image);
         });
-        setImagesList(imagesArr);
+        dispatch(setImagesList(imagesArr));
         setLoading(false);
       }
     );
@@ -97,7 +99,7 @@ const GalleryPage = () => {
         querySnapshot.forEach((doc) => {
           imagesArr.push(doc.data().image);
         });
-        setImagesList(imagesArr);
+        dispatch(setImagesList(imagesArr));
         setLoading(false);
       }
     );
